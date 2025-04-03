@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlexiCare - Posture Correction System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header class="app-header">
+        <div class="logo">
+          <i class="fas fa-heart-pulse"></i>
+          <h1>FlexiCare</h1>
+        </div>
+        <p class="tagline">Intelligent Posture Correction System</p>
+      </header>
+
+      <div class="main-content">
+        <!-- Left panel for webcam feed -->
+        <div class="webcam-panel">
+          <div class="video-container">
+            <video id="webcam" autoplay playsinline></video>
+            <canvas id="canvas"></canvas>
+            <div class="video-overlay">
+              <div class="camera-status">
+                <i class="fas fa-video"></i> Camera Active
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right panel for controls and feedback -->
+        <div class="controls-panel">
+          <div class="control-section">
+            <h2><i class="fas fa-dumbbell"></i> Exercise Selection</h2>
+            <div class="form-group">
+              <label for="exercise-select">Choose Your Exercise:</label>
+              <div class="select-wrapper">
+                <select id="exercise-select">
+                  {% for exercise in exercises %}
+                  <option value="{{ exercise }}">{{ exercise }}</option>
+                  {% endfor %}
+                </select>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="button-group">
+              <button id="start-btn" class="btn btn-primary">
+                <i class="fas fa-play"></i> Start Exercise
+              </button>
+              <button id="stop-btn" class="btn btn-secondary">
+                <i class="fas fa-stop"></i> Stop Exercise
+              </button>
+            </div>
+          </div>
+
+          <div class="feedback-section">
+            <h2><i class="fas fa-chart-simple"></i> Real-time Feedback</h2>
+            <div class="feedback-item">
+              <span class="label">Posture Status:</span>
+              <span id="status-label" class="value">Not Started</span>
+            </div>
+            <div class="feedback-item">
+              <span class="label">Current Score:</span>
+              <span id="score-label" class="value">0</span>
+            </div>
+            <div class="feedback-item">
+              <span class="label">Exercise Time:</span>
+              <span id="time-label" class="value">0s</span>
+            </div>
+          </div>
+
+          <div class="instructions-section">
+            <h2><i class="fas fa-circle-info"></i> Exercise Instructions</h2>
+            <div id="instructions-text" class="instructions-content">
+              Select an exercise to see instructions.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        <p>© 2025 FlexiCare - All rights reserved</p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>
